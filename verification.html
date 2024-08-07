@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="./">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Screen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f4f7;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1000px;
+            background-color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+        }
+
+        .left-side {
+            flex: 1;
+            background-color: #f5f7f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .left-side img {
+            max-width: 80%;
+        }
+
+        .left-side p {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .right-side {
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+            margin: auto;
+            text-align: center;
+        }
+
+        .verification-box h2 {
+            color: #0056b3;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .verification-box p {
+            color: #6c757d;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 12px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #004494;
+        }
+
+        .resend-link p {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .resend-link a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .resend-link a:hover {
+            text-decoration: underline;
+        }
+
+        .snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px;
+            position: fixed;
+            z-index: 1;
+            top: 0px;
+            width: 100%;
+            transition: visibility 0.3s, opacity 0.3s;
+        }
+
+        .snackbar.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-side">
+            <img src="./assets/img/mine.png" alt="mining png">
+            <p>Register for Crypto Mining operations in Ethiopia.</p>
+        </div>
+        <div class="right-side">
+            <div class="verification-box">
+                <h2>Account Verification</h2>
+                <p>Please enter the verification code sent to your email.</p>
+                <form id="verification-form">
+                    <div class="form-group">
+                        <label for="verification-code">Verification Code</label>
+                        <input type="text" id="verification-code" name="verification-code" placeholder="0 0 0 0 0 0 0" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Verify</button>
+                    </div>
+                </form>
+                <div class="resend-link">
+                    <p>Didn't receive a code? <a href="#" id="resend-code">Resend Code</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="snackbar" class="snackbar"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.0.0-beta.1/jsencrypt.min.js"></script>
+    <script src="./assets/js/beeApp.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                var beeAuth = new BeeAuth();
+                var otpStateResponse = await beeAuth.otpState();
+                console.log('OTP State:', otpStateResponse);
+
+                if (otpStateResponse === "Account already verified") {
+                    window.location.href = "./registration.html";
+                } else {
+                    var otpResponse = await beeAuth.requestOTP();
+                    if (!otpResponse) {
+                        showSnackBar("Failed to request OTP. Please try again.");
+                    }
+                }
+            } catch (error) {
+                console.error('Error during OTP state or request:', error);
+                showSnackBar("Failed to request OTP. Please try again.");
+            }
+        });
+
+        document.getElementById('verification-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            var code = document.getElementById('verification-code').value.trim();
+            if (code === '') {
+                showSnackBar('Please enter the verification code.');
+            } else {
+                var beeAuth = new BeeAuth();
+                var response = await beeAuth.verifyOTP(parseInt(code));
+                if (response == true) {
+                    showSnackBar('Verification successful.');
+                    setTimeout(() => {
+                        window.location.href = "./registration.html";
+                    }, 1000); 
+                } else {
+                    showSnackBar('Verification failed.');
+                }
+            }
+        });
+
+        document.getElementById('resend-code').addEventListener('click', async function (event) {
+            event.preventDefault();
+            var beeAuth = new BeeAuth();
+            var response = await beeAuth.requestOTP();
+            if (response) {
+                showSnackBar('Verification code resent.');
+            } else {
+                showSnackBar('Failed to resend code.');
+            }
+        });
+
+        function showSnackBar(message) {
+            var snackbar = document.getElementById('snackbar');
+            snackbar.textContent = message;
+            snackbar.classList.add('show');
+            setTimeout(function () {
+                snackbar.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

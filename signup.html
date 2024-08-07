@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="./">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - INSA Crypto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1000px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            flex-direction: row;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        .left-side {
+            flex: 1;
+            background-color: #f5f8fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .left-side h2 {
+            color: #0056b3;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .left-side p {
+            color: #6c757d;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .left-side img {
+            max-width: 80%;
+            margin-top: 30px;
+        }
+
+        .right-side {
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .right-side h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        .form-group .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 43px;
+            cursor: pointer;
+            color: #888;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .toggle-password:hover {
+            color: #0056b3;
+        }
+
+        .form-group button {
+            width: 100%;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 12px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #004494;
+        }
+
+        .signup-link {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .signup-link a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px;
+            position: fixed;
+            z-index: 1;
+            top: 0px;
+            width: 100%;
+            transition: visibility 0.3s, opacity 0.3s;
+        }
+
+        .snackbar.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .progress-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 2px solid white;
+            border-left: 2px solid transparent;
+            border-right: 2px solid transparent;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader.s {
+            position: fixed;
+            border: 2px solid white;
+            border-bottom: 2px solid transparent;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin-reverse 1s linear infinite;
+        }
+
+        #signup-form {
+            width: -webkit-fill-available;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin-reverse {
+            0% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-side">
+            <img src="./assets/img/mine.png" alt="Application Dashboard">
+            <h2>Information Network Security Administration</h2>
+            <p>Register for Crypto Mining operations in Ethiopia.</p>
+        </div>
+        <div class="right-side">
+            <h2>Sign Up</h2>
+            <form id="signup-form" onsubmit="return validateForm(event)">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <i class="fas fa-eye toggle-password" id="togglePassword" onclick="togglePassword()"></i>
+                    <div id="password-strength" class="error-message"></div>
+                </div>
+                <div class="form-group" style="display: flex; justify-content: center;">
+                    <button type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class="signup-link">
+                Already have an account? <a href="./login.html">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="snackbar" class="snackbar"></div>
+    <div id="progressOverlay" class="progress-overlay">
+        <div class="loader"></div>
+        <div class="loader s"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.0.0-beta.1/jsencrypt.min.js"></script>
+    <script src="./assets/js/beeApp.js"></script>
+    <script>
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function evaluatePasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[\W_]/.test(password)) strength++;
+
+            return strength;
+        }
+
+        async function validateForm(event) {
+            event.preventDefault();
+
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value.trim();
+            var passwordStrengthElem = document.getElementById('password-strength');
+
+            if (!validateEmail(email)) {
+                showSnackBar("Please enter a valid email address.");
+                return false;
+            } else if (password.length < 8) {
+                passwordStrengthElem.textContent = "Password is too short";
+                return false;
+            }
+
+            // Check password strength
+            let strength = evaluatePasswordStrength(password);
+            if (strength < 3) {
+                passwordStrengthElem.textContent = "Password is not strong enough";
+                return false;
+            } else {
+                passwordStrengthElem.textContent = "";
+            }
+
+            // Show progress overlay
+            document.getElementById('progressOverlay').style.display = 'flex';
+
+            // Call the signup function from BeeAuth
+            var beeAuth = new BeeAuth();
+            var response = await beeAuth.signup(email, password);
+
+            if (response.statusCode === 200) {
+                if (response.body.uid != null) {
+                    const i = localStorage;
+                    i.setItem("uid", response.body.uid); 
+                    i.setItem("sId", response.body.sessionId);
+                    i.setItem("email", email);
+
+                    // Request OTP before redirecting
+                    var otpResponse = await beeAuth.requestOTP();
+                    document.getElementById('progressOverlay').style.display = 'none';
+
+                    if (otpResponse) {
+                        redirectToVerification();
+                    } else {
+                        showSnackBar("Failed to request OTP. Please try again.");
+                    }
+                } else {
+                    document.getElementById('progressOverlay').style.display = 'none';
+                    showSnackBar("Failed please try again");
+                }
+            } else {
+                document.getElementById('progressOverlay').style.display = 'none';
+                showSnackBar(response.body);
+            }
+
+            return true;
+        }
+
+        function showSnackBar(message) {
+            var snackbar = document.getElementById('snackbar');
+            snackbar.textContent = message;
+            snackbar.classList.add('show');
+            setTimeout(function () {
+                snackbar.classList.remove('show');
+            }, 3000);
+        }
+
+        function redirectToVerification() {
+            window.location.href = "./verification.html";
+        }
+
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            document.getElementById('togglePassword').classList.toggle('fa-eye-slash');
+        }
+
+        document.getElementById('togglePassword').addEventListener('click', togglePassword);
+    </script>
+</body>
+
+</html>

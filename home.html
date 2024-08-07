@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="./">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Status</title>
+    <style>
+        :root {
+            font-size: 16px;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .status {
+            max-width: 400px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        .status h2 {
+            color: #333;
+        }
+
+        .status p {
+            color: #666;
+        }
+
+        .status .pending {
+            color: #f39c12;
+        }
+
+        .status .approved {
+            color: #27ae60;
+        }
+
+        .status .rejected {
+            color: #e74c3c;
+        }
+
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .timeline {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .event {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin: 10px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .event .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #4CAF50;
+            margin: auto;
+            position: relative;
+        }
+
+        .event .circle.completed {
+            background: #ffffff;
+            border: 2px solid #4CAF50;
+        }
+        .event .circle.approved {
+            background: #ffffff;
+            border: 2px solid #4CAF50;
+        }
+        .event .circle.disapproved {
+            background: #ffffff;
+            border: 2px solid #ee3030;
+        }
+
+        .event h4 {
+            margin: 10px 0 0 0;
+        }
+
+        .event p {
+            margin: 5px 0 0 0;
+            color: #666;
+        }
+
+        .event span {
+            display: block;
+            margin-bottom: 10px;
+            color: #999;
+        }
+
+        .event.global-launch .circle {
+            background: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .event {
+                flex: 1 1 100%;
+            }
+
+            .event h4 {
+                font-size: 14px;
+            }
+
+            .event p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="timeline">
+            <!-- Timeline events will be populated here -->
+        </div>
+
+        <div class="status">
+            <p>Thank you for your application. We will review it and notify you shortly.</p>
+
+            <div class="form-group" style="display: flex; justify-content: center;">
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.0.0-beta.1/jsencrypt.min.js"></script>
+    <script src="./assets/js/beeApp.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            var doc = new BeeStore({ path: `Applications/${uid}` });
+            var app = await doc.getDoc();
+            if (app != null) {
+                var body = `<h2>Application Status</h2><p>Status: <span class="${app.status ?? "pending"}">${app.status ?? "pending"}</span></p>`;
+                document.getElementsByClassName("status")[0].innerHTML = body += document.getElementsByClassName("status")[0].innerHTML;
+
+                var progressBody = `
+                <div class="event">
+                    <div class="circle"></div>
+                    <h4>Applied</h4>
+                </div>
+                <div class="event">
+                    <div class="circle ${app.statusIndex > 1 ? "":"completed"}"></div>
+                    <h4>Reviewing</h4>
+                </div>
+                <div class="event">
+                    <div class="circle ${app.statusIndex == 3 ?  `${app.status??""}` : "completed"}"></div>
+                    <h4>Completed</h4>
+                </div>`;
+                document.getElementsByClassName("timeline")[0].innerHTML = progressBody += document.getElementsByClassName("timeline")[0].innerHTML;
+            }
+        });
+
+        function logout() {
+            const i = localStorage;
+            i.clear();
+            window.location.href = "./login.html";
+        }
+    </script>
+</body>
+
+</html>

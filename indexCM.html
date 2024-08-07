@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="./">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background: #f9f9f9;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 50px 0;
+            background: #f9f9f9;
+            text-align: left;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #0056b3;
+        }
+
+        .features {
+            padding: 50px 0;
+            background: #fff;
+            text-align: center;
+        }
+
+        .features .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .feature {
+            flex: 1 1 calc(25% - 20px);
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            width: 100%;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .container {
+            clear: both;
+        }
+
+        @media (max-width: 992px) {
+            .feature {
+                flex: 1 1 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 28px; /* Adjusting font size for smaller screens */
+            }
+
+            .hero-content p {
+                font-size: 14px; /* Adjusting font size for smaller screens */
+            }
+
+            .cta-button {
+                padding: 8px 16px; /* Adjusting padding for smaller screens */
+            }
+
+            footer {
+                position: relative; /* Switch back to relative positioning on smaller screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Crypto Mining Registration</h1>
+                <p>This is a placeholder content. This is a placeholder content. This is a placeholder content. This is a placeholder content. This is a placeholder content. This is a placeholder content. This is a placeholder content.</p>
+                <a href="./login.html" style="padding-right: 20px;text-decoration: none;">Login</a>
+                <a href="./signup.html" class="cta-button">Register</a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="feature">
+                <h3>Data Standardization</h3>
+                <p>Access standardized data across various cryptocurrency platforms.</p>
+            </div>
+            <div class="feature">
+                <h3>Security</h3>
+                <p>Ensure the security of your users' data with our robust solutions.</p>
+            </div>
+            <div class="feature">
+                <h3>Robust Coverage</h3>
+                <p>Get comprehensive coverage of multiple cryptocurrencies and exchanges.</p>
+            </div>
+            <div class="feature">
+                <h3>Save Time</h3>
+                <p>Save time and engineering resources with our easy-to-integrate API.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 INSA. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="./">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Information Form</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Company Information</h1>
+        <form id="company-form">
+            <div class="form-group">
+                <label for="company-name">Name of the company</label>
+                <input type="text" id="company-name" name="company-name" required>
+            </div>
+            <div class="form-group">
+                <label for="business-owner-name">Business and owner name</label>
+                <input type="text" id="business-owner-name" name="business-owner-name" required>
+            </div>
+            <div class="form-group">
+                <label for="telephone">Telephone</label>
+                <input type="text" id="telephone" name="telephone"  value="+251" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <h2>Legal ground</h2>
+            <div class="wrap">
+                <div class="form-group">
+                    <label for="passport-number">Passport Number</label>
+                    <input type="text" id="passport-number" name="passport-number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passport-expiry-date">Passport expired date</label>
+                    <input type="date" id="passport-expiry-date" name="passport-expiry-date" required>
+                </div>
+                <div class="form-group e">
+                    <label for="legal-ground">Legal ground</label>
+                    <textarea id="legal-ground" name="legal-ground" required></textarea>
+                </div>
+                <div class="form-group e">
+                    <label for="legal-ground-file">Upload your legal ground file</label>
+                    <input type="file" id="legal-ground-file" name="legal-ground-file" required>
+                </div>
+
+            </div>
+            <h2>Balance of bank deposits</h2>
+            <div class="wrap">
+                <div class="form-group">
+                    <label for="balance-number">In Number</label>
+                    <input type="text" id="balance-number" name="balance-number" required>
+                </div>
+                <div class="form-group">
+                    <label for="balance-words">In Words</label>
+                    <input type="text" id="balance-words" name="balance-words" required>
+                </div>
+            </div>
+
+            <div>
+                <h2>Duration of business years in Ethiopia</h2>
+                <div class="form-group">
+                    <label for="business-years">Per indicated on the business/investment license years</label>
+                    <input type="text" id="business-years" name="business-years" required>
+                </div>
+            </div>
+
+
+            <h2>Number and types of business in Ethiopia</h2>
+            <div class="form-group e">
+                <label for="business-number-types">If more than indicated in #1</label>
+                <textarea id="business-number-types" name="business-number-types" required></textarea>
+            </div>
+            <div class="extended">
+                <h2>Acquired land/business compound</h2>
+
+                <div class="form-group">
+                    <label for="land-amount">Amount in square meters</label>
+                    <input type="text" id="land-amount" name="land-amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="land-certificates">Attach certificate(s)</label>
+                    <input type="file" id="land-certificates" name="land-certificates" required>
+                </div>
+            </div>
+
+            
+                <label for="location" style="margin-bottom: 15px;">Location</label>
+            <div class="form-group e wrap">
+                <div class="form-control">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select</option>
+                        <option value="Ethiopia">Ethiopia</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-control" id="region-control" style="display: none;">
+                    <label for="region">Region</label>
+                    <select id="region" name="region"></select>
+                </div>
+
+                <div class="form-control" id="city-control" style="display: none;">
+                    <label for="city">City</label>
+                    <select id="city" name="city"></select>
+                </div>
+
+                <div class="form-control" id="subcity-control" style="display: none;">
+                    <label for="subcity">Sub-city</label>
+                    <select id="subcity" name="subcity"></select>
+                </div>
+            </div>
+
+            <div>
+               <h2>Revenue Amount</h2>
+            <div class="form-group">
+                <label for="revenue-amount"></label>
+                <input type="text" id="revenue-amount" name="revenue-amount">
+            </div>  
+            </div>
+           
+
+
+            <h2>Information about the mining machines</h2>
+            <div class="form-control">
+                <label for="machine-status">Machine status</label>
+                <select id="machine-status" name="machine-status">
+                    <option value="">Select machine status</option>
+                    <option value="">NEW</option>
+                    <option value="">USED</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="machine-type">Type</label>
+                <input type="text" id="machine-type" name="machine-type">
+            </div>
+            <div class="form-group">
+                <label for="machine-size">Size</label>
+                <input type="text" id="machine-size" name="machine-size">
+            </div>
+            <div class="form-group">
+                <label for="machine-number">Quantity</label>
+                <input type="text" id="machine-number" name="machine-number">
+            </div>
+            <div class="form-group">
+                <label for="machine-price">Price</label>
+                <input type="text" id="machine-price" name="machine-price">
+            </div>
+            <div class="form-group">
+                <label for="machine-brand-name">Brand Name</label>
+                <input type="text" id="machine-brand-name" name="machine-brand-name">
+            </div>
+            <div class="form-group">
+                <label for="machine-memory-size">Memory Size</label>
+                <input type="text" id="machine-memory-size" name="machine-memory-size">
+            </div>
+            <div class="form-group">
+                <label for="machine-description">Other description</label>
+                <textarea id="machine-description" name="machine-description"></textarea>
+            </div>
+            <div class="form-group e">
+                <label for="business-purpose">Purpose of this business</label>
+                <textarea id="business-purpose" name="business-purpose"></textarea>
+            </div>
+
+            <div class="form-group e">
+                <label for="transparency-agreement">Willingness to be monitored for Transparency, Immutability and
+                    Security</label>
+                <div class="wrap  mt">
+                    <input type="checkbox" id="transparency-agreement" name="transparency-agreement">
+                    <label for="transparency-agreement">I agree with the terms and conditions.</label>
+                </div>
+            </div>
+            <div class="extended">
+                <div class="form-group">
+                <label for="legal-owner-name">Name of legal owner/Legal representative:</label>
+                <input type="text" id="legal-owner-name" name="legal-owner-name">
+                </div> 
+            </div>
+           
+        <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="overlay" class="overlay">
+        <div class="message-box" id="messageBox">
+            <p>Registration successful. You will receive a confirmation call or email soon.</p>
+            <button onclick="navigateToHome()" class="txt_btn">Okay</button>
+        </div>
+    </div>
+
+    <div id="snackbar" class="snackbar"></div>
+    <div id="progressOverlay" class="progress-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.0.0-beta.1/jsencrypt.min.js"></script>
+  <script src="./assets/js/beeApp.js"></script>
+    <script src="./assets/js/registration.js"></script>
+</body>
+
+</html>
